@@ -4,8 +4,7 @@ import axios from 'axios'
 class Post extends Component {
 
     state = {
-        id: null,
-        post: []
+        post: null
     }
     componentDidMount() {
         let id= this.props.match.params.post_id
@@ -19,15 +18,24 @@ class Post extends Component {
     }
 
     render() {
-			const {post, id} = this.state
-        return (
-        <div className= "post card " key={id}>
-					 <div className= "card-content">
-						<span className ="card-title"> {post.title}</span>
+			const {post} = this.state;
+
+			const postCard = post ? (
+				<div className= "post " key={post.id}>
+					 <div className= "center">
+						<h4 className ="center red-text"> {post.title}</h4>
 						<p> {post.body}</p>
 					</div>
 				</div>
-        );
+        ) :
+			(<div className="center">
+				<h2 className="center text-blue">Post Loading ...</h2>
+			</div>);
+
+        return (
+					<div className="container">{postCard}</div>
+				)
+
     }
 
 }
