@@ -7,6 +7,17 @@ const initialState = {
 }
 
 const rootReducer = (state = initialState, action) => {
+
+	if(action.type ==="DELETE_POST") {
+		let newPost = state.post.filter((post)=>{
+			return action.id !== post.id
+		});
+
+		return{
+			...state,
+			post: newPost
+		}
+	}
 	return state;
 }
 
