@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import Pokeball from '../pokeball.png';
+import {connect} from 'react-redux'
 
 
 class Home extends Component {
 
    render() {
-		 const {post} = this.state
+		 const {post} = this.props;
 
 		 const postlist = post.length ? (post.map(post =>{
 			 return (
@@ -29,4 +29,15 @@ class Home extends Component {
    }
 }
 
-export default Home
+
+// this functions will make the state as props to the component
+
+const mapStateToProps = (state) => {
+	//this will represent the properties of the state as props
+	return {
+		post: state.post
+	}
+}
+
+// this connect is a function that calls the high order component itself from redux
+export default connect(mapStateToProps)(Home)
